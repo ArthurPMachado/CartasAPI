@@ -1,42 +1,29 @@
-/* eslint-disable prefer-promise-reject-errors */
-import fs from 'fs';
+import { Request, Response, NextFunction } from 'express';
 
-interface Letter {
-  id: number,
-  from: string,
-  to: string,
-  title: string,
-  description: string,
-}
+function mustBeInteger(request: Request, response: Response, next: NextFunction) {
+  const { id } = request.params;
 
-function getNewId(letters: Letter[]) {
-  if (letters.length > 0) {
-    return letters[letters.length - 1].id + 1;
+  if (!Number.isInteger(parseInt(id))) {
+    response.status(400).json({
+      message: 'Id must be an integer, verify and send again',
+    });
+  } else {
+    next();
   }
-
-  return 1;
 }
 
-function getNewDate() {
-  new Date().toString();
+function checkFields(request: Request, response: Response, next: NextFunction) {
+  const {
+    from, to, title, description,
+  } = request.body;
+
+  if (from && to && title && description) {
+    next();
+  } else {
+    response.status(400).json({
+      message: 'Some field(s) are empty',
+    });
+  }
 }
 
-function mustBeInArray(letters: Letter[], id) {
-  return new Promise((resolve, reject) => {
-    const findLetter = letters.find((letter) => letter.id === id);
-    if (!findLetter) {
-      reject({
-        message: 'Id is not correct',
-        status: 404,
-      });
-    }
-  });
-}
-
-function writeLettersFile(filename, content) {
-  fs.writeFileSync(filename, JSON.stringify(content), 'utf8');
-}
-
-export {
-  getNewId, getNewDate, mustBeInArray, writeLettersFile,
-};
+export { mustBeInteger, checkFields };
