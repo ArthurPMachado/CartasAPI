@@ -22,4 +22,11 @@ describe('Letters', () => {
     expect(response.status).toBe(200);
     expect(response.body.length).toBeGreaterThanOrEqual(1);
   });
+
+  it('Should be able to retrieve a single letter', async () => {
+    const response = await request(server).get(`${baseURL}/1`);
+
+    expect(response.status).toBe(200);
+    expect(response.body.id).toEqual(1);
+  });
 });
