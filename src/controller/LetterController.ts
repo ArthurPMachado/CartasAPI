@@ -56,7 +56,7 @@ function updateLetter(id, registeredLetter) {
   return new Promise((resolve, reject) => {
     mustBeInArray(letters, id)
       .then((letter: Letter) => {
-        const index = letters.findIndex((item) => item.id == letter.id);
+        const index = letters.findIndex((item) => item.id === letter.id);
         id = { id: letter.id };
         const date = {
           created_at: letter.created_at,
@@ -74,7 +74,7 @@ function deleteLetter(id) {
   return new Promise((resolve, reject) => {
     mustBeInArray(letters, id)
       .then(() => {
-        letters = letters.filter((item) => item.id !== id);
+        letters = letters.filter((item) => item.id !== Number(id));
         writeLettersFile(letters);
         resolve(undefined);
       })

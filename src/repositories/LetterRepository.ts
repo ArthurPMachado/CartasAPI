@@ -24,10 +24,10 @@ function getNewDate() {
 
 function mustBeInArray(letters: Letter[], id) {
   return new Promise((resolve, reject) => {
-    const findLetter = letters.find((letter) => letter.id === id);
+    const findLetter = letters.find((letter) => letter.id === Number(id));
     if (!findLetter) {
       reject({
-        message: 'Id is not correct',
+        message: 'Id is not correct or does not exist',
         status: 404,
       });
     }
