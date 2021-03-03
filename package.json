@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
-    "lint": "npx eslint src/** --fix"
+    "lint": "npx eslint src/** --fix",
+    "test": "jest -i"
   },
   "dependencies": {
     "express": "^4.17.1"
