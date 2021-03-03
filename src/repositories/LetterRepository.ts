@@ -1,5 +1,6 @@
 /* eslint-disable prefer-promise-reject-errors */
 import fs from 'fs';
+import * as path from 'path';
 
 interface Letter {
   id: number,
@@ -18,7 +19,7 @@ function getNewId(letters: Letter[]) {
 }
 
 function getNewDate() {
-  new Date().toString();
+  return new Date().toString();
 }
 
 function mustBeInArray(letters: Letter[], id) {
@@ -35,8 +36,9 @@ function mustBeInArray(letters: Letter[], id) {
   });
 }
 
-function writeLettersFile(filename, content) {
-  fs.writeFileSync(filename, JSON.stringify(content), 'utf8');
+function writeLettersFile(content) {
+  const dataPath = path.resolve(__dirname, '..', 'data', 'letters.json');
+  fs.writeFileSync(dataPath, JSON.stringify(content), 'utf8');
 }
 
 export {

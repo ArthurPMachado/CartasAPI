@@ -5,7 +5,7 @@ import {
 import { mustBeInteger, checkFields } from './service/LetterService';
 
 const router = Router();
-const baseURL = process.env.BASE_URL;
+const baseURL = '/api/v1/letters';
 
 router.get(`${baseURL}/:id`, mustBeInteger, async (request, response) => {
   const { id } = request.params;
@@ -39,7 +39,9 @@ router.post(`${baseURL}`, checkFields, async (request, response) => {
       message: 'Your letter was created successfully!',
       content: letter,
     }))
-    .catch((error) => response.status(500).json({ message: error.message }));
+    .catch((error) => {
+      response.status(500).json({ message: error.message });
+    });
 });
 
 router.put(`${baseURL}/:id`, mustBeInteger, checkFields, async (request, response) => {

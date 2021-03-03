@@ -6,9 +6,7 @@ import {
   getNewId, getNewDate, mustBeInArray, writeLettersFile,
 } from '../repositories/LetterRepository';
 
-import database from '../data/letters.json';
-
-let letters = database;
+let letters = require('../data/letters.json');
 
 interface Letter {
   id: number,
@@ -28,7 +26,7 @@ function createLetter(newLetter) {
     };
     newLetter = { ...id, ...date, ...newLetter };
     letters.push(newLetter);
-    writeLettersFile(database, letters);
+    writeLettersFile(letters);
     resolve(newLetter);
   });
 }
@@ -65,7 +63,7 @@ function updateLetter(id, registeredLetter) {
           updated_at: getNewDate(),
         };
         letters[index] = { ...id, ...date, ...registeredLetter };
-        writeLettersFile(database, letters);
+        writeLettersFile(letters);
         resolve(letters[index]);
       })
       .catch((error) => reject(error));
@@ -77,7 +75,7 @@ function deleteLetter(id) {
     mustBeInArray(letters, id)
       .then(() => {
         letters = letters.filter((item) => item.id !== id);
-        writeLettersFile(database, letters);
+        writeLettersFile(letters);
         resolve(undefined);
       })
       .catch((error) => reject(error));
