@@ -6,9 +6,9 @@ import {
   getNewId, getNewDate, mustBeInArray, writeLettersFile,
 } from '../repositories/LetterRepository';
 
-const database = require('../data/letters.json');
+import database from '../data/letters.json';
 
-let letters = require(database);
+let letters = database;
 
 interface Letter {
   id: number,
