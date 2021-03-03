@@ -5,6 +5,10 @@
   "repository": "https://github.com/ArthurPMachado/CartasAPI.git",
   "author": "Arthur Pereira Machado <machadoparthur1@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
+    "lint": "npx eslint src/** --fix"
+  },
   "dependencies": {
     "express": "^4.17.1"
   },
