@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 function mustBeInteger(request: Request, response: Response, next: NextFunction) {
   const { id } = request.params;
 
-  if (!Number.isInteger(parseInt(id))) {
+  if (!Number.isInteger(parseInt(id, 10))) {
     response.status(400).json({
       message: 'Id must be an integer, verify and send again',
     });
