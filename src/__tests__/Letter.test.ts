@@ -47,7 +47,6 @@ describe('Letters', () => {
 
   it('Should be able to delete a letter', async () => {
     const response = await request(server).delete(`${baseURL}/1`);
-
     const getLetter = await request(server).get(`${baseURL}/1`);
 
     expect(response.status).toBe(200);
