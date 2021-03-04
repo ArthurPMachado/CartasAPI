@@ -44,4 +44,13 @@ describe('Letters', () => {
     expect(response.body.title).not.toEqual(getLetter.body.title);
     expect(response.body.description).not.toEqual(getLetter.body.description);
   });
+
+  it('Should be able to delete a letter', async () => {
+    const response = await request(server).delete(`${baseURL}/1`);
+
+    const getLetter = await request(server).get(`${baseURL}/1`);
+
+    expect(response.status).toBe(200);
+    expect(getLetter.status).toBe(404);
+  });
 });
