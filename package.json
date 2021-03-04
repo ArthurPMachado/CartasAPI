@@ -6,7 +6,7 @@
   "author": "Arthur Pereira Machado <machadoparthur1@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
+    "start": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
     "lint": "npx eslint src/** --fix",
     "test": "jest -i"
   },
