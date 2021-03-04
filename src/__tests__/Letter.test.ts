@@ -29,4 +29,19 @@ describe('Letters', () => {
     expect(response.status).toBe(200);
     expect(response.body.id).toEqual(1);
   });
+
+  it('Should be able to update a letter', async () => {
+    const getLetter = await request(server).get(`${baseURL}/1`);
+
+    const response = await request(server).put(`${baseURL}/1`).send({
+      from: getLetter.body.from,
+      to: getLetter.body.to,
+      title: 'Oi papai noel, tudo bem',
+      description: 'Quero receber um jogo novo pra me divertir nas férias da escola',
+    });
+
+    expect(response.status).toBe(200);
+    expect(response.body.title).not.toEqual(getLetter.body.title);
+    expect(response.body.description).not.toEqual(getLetter.body.description);
+  });
 });
